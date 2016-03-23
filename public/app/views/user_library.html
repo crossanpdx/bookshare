@@ -1,0 +1,47 @@
+<div class="container">
+    
+    <div class="col-md-12">
+    
+        <h1>All Books.</h1>
+        
+        <div ng-if="loading">
+            <div class="well text-center">
+              <h3><i class="fa fa-refresh fa-spin"></i> Loading books...</h3>
+            </div>
+        </div>
+        
+        <div ng-if="message">
+            <div class="well text-center">
+              <h3><i class="fa fa-exclamation-triangle"></i> {{ message }} </h3>
+            </div>
+        </div>
+    
+    </div>
+    
+    <div class="col-md-4 col-sm-6" ng-repeat="book in allBooks">
+        <div class="panel">
+          <div class="panel-body">
+              <div class="row">
+                  <div class="col-md-6">
+                      <p><img class="img-responsive img-center img-thumb" ng-src="{{ book.img }}" /></p>
+                  </div>
+                  <div class="col-md-6">
+                      <h4>{{ book.title }}</h4>
+                  </div>
+                  <div class="col-md-12">
+                      <p ng-if="!checkOwns(book.book_id) && !checkRequest(book.book_id)"><button ng-click="requestBook(book.book_id)" class="btn btn-default btn-block">Request</button></p>
+                      <p ng-if="checkOwns(book.book_id)"><button class="btn btn-default btn-block disabled">Book Owned</button></p>
+                      <p ng-if="!checkOwns(book.book_id) && checkRequest(book.book_id)"><button class="btn btn-default btn-block disabled">Book Requested</button></p>
+                  </div>
+                  <div ng-if="book.bookRequest" class="col-md-12">
+                      <div class="well text-center">
+                      <small>Do you want to request this book?</small><br>
+                      <button ng-click="cancelRequest(book.book_id)" class="btn btn-danger btn-sm">Cancel</button><button ng-click="confirmRequest(book.book_id)" class="btn btn-success btn-sm">Yes</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+    </div>
+    
+</div>

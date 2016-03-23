@@ -1,0 +1,85 @@
+<div class="container">
+    
+    <div class="col-md-12">
+    
+        <h1>My Trades.</h1>
+        
+        <div ng-if="loading">
+            <div class="well text-center">
+              <h3><i class="fa fa-refresh fa-spin"></i> Loading books...</h3>
+            </div>
+        </div>
+        
+        <div ng-if="message">
+            <div class="well text-center">
+              <h3><i class="fa fa-exclamation-triangle"></i> {{ message }} </h3>
+            </div>
+        </div>
+    
+    </div>
+    
+    <div class="col-md-12"><h2 class="text-success">Requests for You.</h2></div>
+    
+    <div ng-if="!myMatches[0]" class="col-md-12">
+        <div class="well text-center">
+          <h4><i class="fa fa-times"></i> No trade requests for you yet. Keep quacking.</h4>
+        </div>
+    </div>
+        
+    <div class="col-md-4 col-sm-6" ng-repeat="book in myMatches">
+        <div class="panel">
+          <div class="panel-body">
+              <div class="row">
+                  <div class="col-md-6">
+                      <p><img class="img-responsive img-center img-thumb" ng-src="{{ book.img }}" /></p>
+                  </div>
+                  <div class="col-md-6">
+                      <h4>{{ book.title }}</h4>
+                  </div>
+                  <div class="col-md-12">
+                      <p><button ng-click="requestTrade(book.book_id)" class="btn btn-default btn-block">Accept Trade</button></p>
+                  </div>
+                  <div ng-if="book.acceptTrade" class="col-md-12">
+                      <div class="well text-center">
+                      <small>Are you sure you want to trade this book?</small><br>
+                      <button ng-click="cancelTrade(book.book_id)" class="btn btn-danger btn-sm">Keep Book</button><button ng-click="tradeBook(book.book_id)" class="btn btn-success btn-sm">Trade Book</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+    </div>
+    
+    <div class="col-md-12"><h2 class="text-success">Your Requests.</h2></div>
+    
+    <div ng-if="!myRequests[0]" class="col-md-12">
+        <div class="well text-center">
+          <h4><i class="fa fa-times"></i> You haven't requested any trades yet. Check out available books in <a href="#/books">Books</a>.</h4>
+        </div>
+    </div>
+    
+    <div class="col-md-4 col-sm-6" ng-repeat="book in myRequests">
+        <div class="panel">
+          <div class="panel-body">
+              <div class="row">
+                  <div class="col-md-6">
+                      <p><img class="img-responsive img-center img-thumb" ng-src="{{ book.img }}" /></p>
+                  </div>
+                  <div class="col-md-6">
+                      <h4>{{ book.title }}</h4>
+                  </div>
+                  <div class="col-md-12">
+                      <p><button ng-click="requestDelete(book.book_id)" class="btn btn-default btn-block">Remove Request</button></p>
+                  </div>
+                  <div ng-if="book.deleteRequest" class="col-md-12">
+                      <div class="well text-center">
+                      <small>Are you sure you want to remove this book from your requests?</small><br>
+                      <button ng-click="cancelDelete(book.book_id)" class="btn btn-success btn-sm">Keep Request</button><button ng-click="deleteBook(book.book_id)" class="btn btn-danger btn-sm">Remove Request</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+    </div>
+    
+</div>

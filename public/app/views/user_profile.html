@@ -1,0 +1,91 @@
+<div class="container">
+    
+    <div class="col-md-12">
+    <h1>Profile.</h1>
+    <p class="lead">Welcome back {{user.username}}</p>
+    </div>
+  
+ 
+    <div class="col-sm-6">
+        <div class="well text-center">
+            <h3><span class="fa fa-5x fa-twitter"></span><br>Twitter</h3>
+            
+                <div ng-if="user.twitter">
+                    <p>
+                        <strong>Username</strong>: {{user.twitter.username }}<br>
+                        <strong>You are logged in with twitter</strong>
+                    </p>
+                </div>
+                
+                <div ng-if="!user.twitter">
+                    <p>
+                        <a href="/auth/twitter" class="btn btn-success"><i class="fa fa-twitter"></i> Connect Twitter</a>
+                    </p>
+                </div>
+                
+        </div>
+    </div>
+    
+    <div class="col-sm-6">
+        <div class="well text-center">
+            <h3><span class="fa fa-5x fa-facebook"></span><br>Facebook</h3>
+            
+                <div ng-if="user.facebook">
+                    <p>
+                        <strong>Username</strong>: {{ user.facebook.displayName }}<br>
+                        <strong>You are logged in with facebook</strong>
+                    </p>
+                </div>
+                
+                <div ng-if="!user.facebook">
+                    <p>
+                        <a href="/auth/facebook" class="btn btn-success"><i class="fa fa-facebook"></i> Connect Facebook</a>
+                    </p>
+                </div>
+            
+        </div>
+    </div>
+    
+    <div class="col-md-12"> 
+        <h3>Additional Info.</h3>
+        <form ng-submit="updateUser()" class="well">
+            <div class="form-group">
+                <div ng-if="helpForm" class="text-center"><small>{{ helpForm }}</small></div>
+                <br>
+                <label for="fullName">Full Name:</label>
+                <input ng-model="formData.fullName" name="fullName" id="fullName" type="text" class="form-control" placeholder="Your full name..." required> 
+                <label for="userCity">City:</label>
+                <input ng-model="formData.city" name="city" id="city" type="text" class="form-control" placeholder="Your city..." required> 
+                <label for="userState">State:</label>
+                <input ng-model="formData.state" name="userState" id="userState" type="text" class="form-control" placeholder="Your state..."> 
+                  <label for="userCountry">Country:</label>
+                <input ng-model="formData.country" name="userCountry" id="userCountry" type="text" class="form-control" placeholder="Your country..." > 
+            </div>
+            <input type="submit" id="updateInfo" class="btn btn-block btn-default" value="Update User Information" />
+        </form>
+    </div>
+    
+    <div class="col-md-12"> 
+        <h3>Activity.</h3>
+        <div ng-if="user.activity[0]">
+            <div class="list-group">
+              <li class="list-group-item list-group-item-default" ng-repeat="activity in user.activity">
+                  You {{activity.type}}: <b>{{ activity.book }}</b>, on {{ activity.date }}.
+              </li>
+            </div>
+        </div>
+        <div ng-if="!user.activity[0]">
+            <div class="jumbotron text-center">
+              <h3><i class="fa fa-exclamation-circle"></i> No activity yet!</h3>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-12">
+        <h3>Done?</h3>
+        <div class="jumbotron text-center">
+          <button ng-click="userLogout()" class="btn btn-default btn-lg"><i class="fa fa-sign-out"></i> Log Out</button>
+        </div>
+    </div>
+    
+</div>
